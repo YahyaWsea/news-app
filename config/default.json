@@ -1,0 +1,5 @@
+{
+    "MONGO_URL": "    mongodb+srv://yahya:12345@newscluster-lexty.mongodb.net/news?retryWrites=true&w=majority",
+    "jwtSecret": "hy_newsapp_hy",
+    "APIkey": "4886bf89257c4b0ebc74ac9c689fb27e"
+}
