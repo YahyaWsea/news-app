@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import 'antd/dist/antd.css';
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Col, Pagination } from 'antd';
 import WithNavBar from './WithNavBar';
 import EmptyPlaceholder from '../components/EmptyPlaceholder';
-import ArticleCard from '../components/ArticleCard'
-import Loader from '../components/Loader'
-import { getArticles } from '../api/NewsApi'
-import { getUserSubscribtions } from '../api/UserApi'
+import ArticleCard from '../components/ArticleCard';
+import Loader from '../components/Loader';
+import { getArticles } from '../api/news';
 
 
 
@@ -21,44 +20,74 @@ function Home(props) {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [found, setFound] = useState(true);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(20);
 
     useEffect(() => {
         setLoading(true);
-
         async function fetchData() {
-            const subs = await getUserSubscribtions();
-            console.log(subs);
-            if (!subs.data.length) {
+            const { data: { articles } } = await getArticles(page, pageSize);
+            console.log(articles);
+            if (!articles) {
                 setLoading(false);
                 setFound(false);
             } else {
-                const res = await getArticles(subs.data);
                 setLoading(false);
-                setArticles(res.data.articles);
-                console.log(res.data.articles);
+                setArticles(articles);
             }
         }
         fetchData();
-        // getUserSubscribtions().then((res) => {
-        //     console.log(res);
-        //     // setSubs(res);
-        //     getArticles(res.data).then(res => {
-        //         console.log(res.data.articles);
-        //         setArticles(res.data.articles);
-        //         setLoading(false);
-        //     })
-        //         .catch(err => console.log(err));
 
-        // }).catch((err) => {
-        //     console.log(err);
-        // })
+    }, [page, pageSize]);
 
-    }, []);
+    const handlePagination = (page, pageSize) => {
+        console.log({ page, pageSize });
+        setPage(page);
+    }
+    const handlePageSizeChange = (current, size) => {
+        // console.log({ current, size });
+        setPageSize(size);
+        setPage(1);
+    }
+
+
+    const renderArticles = () => {
+        return (
+            articles.map((article) =>
+                <Col style={{ marginTop: "2rem" }} >
+                    <ArticleCard
+                        key={article.title}
+                        article={article}
+                    />
+                </Col>
+            )
+        )
+    }
 
 
     return (
         <>
             <Content style={{ padding: '0 50px' }}>
+                <Row align="middle" justify="center" style={{ marginTop: "2rem" }} >
+                    {
+                        found ?
+                            <Col>
+                                <Pagination
+                                    current={page}
+                                    onChange={handlePagination}
+                                    defaultCurrent={1}
+                                    total={100}
+                                    pageSize={pageSize}
+                                    showSizeChanger
+                                    pageSizeOptions={['6', '9', '12']}
+                                    onShowSizeChange={handlePageSizeChange}
+                                />
+
+                            </Col>
+                            : null
+                    }
+
+                </Row>
                 <Row justify="space-around" style={{}} >
                     {
                         loading ?
@@ -66,18 +95,10 @@ function Home(props) {
                                 <Loader />
                             </Col>
                             :
-                            articles.map((article) =>
-
-                                <Col style={{ marginTop: "2rem" }} >
-                                    <ArticleCard
-                                        key={article.title}
-                                        article={article}
-                                    />
-                                </Col>
-                            )
+                            renderArticles()
                     }
                     {
-                        found ? null : <EmptyPlaceholder msg=" Subscribe sources to get articles " />
+                        found ? null : <EmptyPlaceholder msg=" Subscribe sources to get articles and news" />
                     }
                 </Row>
             </Content>

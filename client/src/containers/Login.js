@@ -4,7 +4,7 @@ import styles from './Register.module.css';
 import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import { loginUser } from '../api/UserApi';
+import { loginUser } from '../api/user';
 
 
 const layout = {
@@ -20,6 +20,7 @@ export default function Login(props) {
         types: {
             email: '${name} is not validate email!',
         },
+        min: 'password must be at least 8 characters'
     };
 
     const onFinish = ({ email, password }) => {
@@ -28,20 +29,15 @@ export default function Login(props) {
             password
         }
         loginUser(formData).then(res => {
-            if (res.data.status === "success") {
-                sessionStorage.setItem('token', res.data.token);
-                // const userInfo = JSON.parse(window.atob(res.data.token.split('.')[1].replace(/_/g, '/').replace(/-/g, '+')));
-                console.log(res.data);
-                console.log(res.status);
-                // props.history.push('/');
-                window.location.pathname = "/";
-            } else {
-                console.log(res);
-            }
+            const { data: { status, token } } = res
+            sessionStorage.setItem('token', token);
+            console.log(res.data);
+            console.log(res.status);
+            // props.history.push('/');
+            window.location.pathname = "/"
+        }).catch(err => {
+            console.log(err);
         })
-            .catch(err => {
-                console.log(err);
-            })
     };
 
     const onFinishFailed = errorInfo => {
@@ -76,9 +72,8 @@ export default function Login(props) {
                         <Form.Item
                             name="password"
                             rules={[
-                                {
-                                    required: true,
-                                },
+                                { required: true },
+                                { min: 8, message: "password must be at least 8 characters" }
                             ]}
                             hasFeedback
                         >

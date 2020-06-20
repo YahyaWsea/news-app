@@ -4,7 +4,7 @@ import styles from './Register.module.css';
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
-import { registerUser } from '../api/UserApi';
+import { registerUser } from '../api/user';
 
 const layout = {
     labelCol: { span: 6 },

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const userRouter = require('./routes/user');
 const { auth } = require('./middleware/auth');
+const { handleError } = require('./middleware/error');
 const authRouter = require('./routes/auth');
 const sourceRouter = require('./routes/sources');
 const newsRouter = require('./routes/news');
@@ -31,6 +32,12 @@ app.use('/auth', authRouter);
 app.use('/user', auth, userRouter);
 app.use('/sources', auth, sourceRouter);
 app.use('/news', auth, newsRouter);
+
+// handling error
+app.use((err, req, res, next) => {
+    handleError(err, res);
+})
+
 
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));

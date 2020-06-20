@@ -6,8 +6,8 @@ import SearchForm from '../components/SearchForm';
 import SourceCard from '../components/SourceCard';
 import Loader from '../components/Loader';
 import EmptyPlaceholder from '../components/EmptyPlaceholder';
-import { getSources, getFilteredSources } from '../api/NewsApi';
-import { getUserSubscribtions } from '../api/UserApi';
+import { getSources, getFilteredSources } from '../api/sources';
+import { getUserSubscribtions } from '../api/sources';
 
 
 const { Content } = Layout;
@@ -40,6 +40,7 @@ function Sources(props) {
 
     const handleFilter = ({ category, language }) => {
         setLoading(true);
+        setFound(true);
         getFilteredSources(category, language).then((res) => {
             console.log(res.data.sources);
             setLoading(false);

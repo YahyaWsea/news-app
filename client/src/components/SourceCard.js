@@ -3,7 +3,7 @@ import styles from './SourceCard.module.css';
 import 'antd/dist/antd.css';
 import { AlertFilled } from '@ant-design/icons';
 import { Button, Typography } from 'antd';
-import { subscribeSource } from '../api/UserApi';
+import { subscribeSource } from '../api/sources';
 const { Paragraph } = Typography;
 
 
