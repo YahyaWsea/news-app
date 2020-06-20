@@ -10,6 +10,7 @@ const { Paragraph } = Typography;
 function SourceCard(props) {
 
     const [subscribed, setSubscribed] = useState(false);
+    const [errorMSG, setErrorMSG] = useState(null);
     const { source, subscribtions } = props;
 
     useEffect(() => {
@@ -21,20 +22,17 @@ function SourceCard(props) {
 
 
     const handleSubscribe = (e) => {
-        // console.log(e.target.content);
         subscribeSource(source.id, "subscribe").then(res => {
-            console.log(res);
             setSubscribed(true);
         }).catch(err => {
-            console.log(err);
+            setErrorMSG("Connection failed");
         })
     }
     const handleUnSubscribe = () => {
         subscribeSource(source.id, "unsubscribe").then(res => {
-            console.log(res);
             setSubscribed(false);
         }).catch(err => {
-            console.log(err);
+            setErrorMSG("Connection failed");
         })
     }
 

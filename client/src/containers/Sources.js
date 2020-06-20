@@ -23,14 +23,13 @@ function Sources(props) {
     useEffect(() => {
         setLoading(true);
         getSources().then(res => {
-            console.log(res.data.sources);
-            setSources(res.data.sources);
+            const { data: { sources } } = res;
+            setSources(sources);
             setLoading(false);
-            if (!res.data.sources.length) {
+            if (!sources.length) {
                 setFound(false);
             }
         }).catch(err => console.log(err));
-
         getUserSubscribtions().then((res) => {
             setSubs(res.data);
         }).catch(err => console.log(err));
@@ -42,7 +41,6 @@ function Sources(props) {
         setLoading(true);
         setFound(true);
         getFilteredSources(category, language).then((res) => {
-            console.log(res.data.sources);
             setLoading(false);
             setSources(res.data.sources);
             if (!res.data.sources.length) {

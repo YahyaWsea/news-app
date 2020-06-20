@@ -27,7 +27,6 @@ function Home(props) {
         setLoading(true);
         async function fetchData() {
             const { data: { articles } } = await getArticles(page, pageSize);
-            console.log(articles);
             if (!articles) {
                 setLoading(false);
                 setFound(false);
@@ -41,11 +40,9 @@ function Home(props) {
     }, [page, pageSize]);
 
     const handlePagination = (page, pageSize) => {
-        console.log({ page, pageSize });
         setPage(page);
     }
     const handlePageSizeChange = (current, size) => {
-        // console.log({ current, size });
         setPageSize(size);
         setPage(1);
     }

@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './NavBar.module.css';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { SearchOutlined } from '@ant-design/icons';
 
 
 export default function NavBar(props) {
 
     const handleLogout = () => {
         sessionStorage.removeItem('token');
-        window.location.pathname = "/login";
+        props.history.push('/login');
     }
     return (
         <>
@@ -20,14 +19,11 @@ export default function NavBar(props) {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-
                     <Nav className="mr-auto">
                         <Nav.Link as={Link} to="/" className={styles.link} >  Home </Nav.Link>
                         <Nav.Link as={Link} to="/sources" className={styles.link}>Sources</Nav.Link>
                     </Nav>
-
                     <Nav.Link as={Link} onClick={handleLogout} className={styles.link} > Logout </Nav.Link>
-
                 </Navbar.Collapse>
             </Navbar>
         </>

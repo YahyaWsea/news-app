@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Register.module.css';
 import 'antd/dist/antd.css';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Alert } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { loginUser } from '../api/user';
 
@@ -14,6 +14,9 @@ const layout = {
 
 export default function Login(props) {
 
+    const [errorMSG, setErrorMSG] = useState(null);
+    const [visible, setVisible] = useState(true);
+
 
     const validateMessages = {
         required: '${name} is required!',
@@ -22,29 +25,22 @@ export default function Login(props) {
         },
         min: 'password must be at least 8 characters'
     };
-
+    const handleClose = () => {
+        setVisible(false);
+    };
     const onFinish = ({ email, password }) => {
         const formData = {
             email,
             password
         }
         loginUser(formData).then(res => {
-            const { data: { status, token } } = res
+            const { data: { status, token } } = res;
             sessionStorage.setItem('token', token);
-            console.log(res.data);
-            console.log(res.status);
-            // props.history.push('/');
-            window.location.pathname = "/"
+            props.history.push('/');
         }).catch(err => {
-            console.log(err);
+            setErrorMSG(err.response.data.message);
         })
     };
-
-    const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
-    };
-
-
 
     return (
         <>
@@ -84,6 +80,13 @@ export default function Login(props) {
                                 className={styles.input_field}
                             />
                         </Form.Item>
+                        {
+                            errorMSG && <Alert
+                                description={errorMSG}
+                                type="error"
+                                closable
+                            />
+                        }
                         <Form.Item >
                             <Button type="primary" htmlType="submit" className={styles.submit_btn}>
                                 Login

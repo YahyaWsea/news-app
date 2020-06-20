@@ -1,12 +1,7 @@
 import { Route, Redirect } from 'react-router-dom';
-import React, { useEffect, useContext } from 'react';
-// import { checkAuth } from './authHelpers';
-// import { UserContext } from './authContext';
-
+import React from 'react';
 
 const ProtectedRoute = (props) => {
-    // console.log(useContext(UserContext));
-    // const { user } = useContext(UserContext);
     const token = sessionStorage.getItem("token");
     const { component: Component, ...rest } = props;
 

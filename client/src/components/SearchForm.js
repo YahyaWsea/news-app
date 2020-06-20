@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import 'antd/dist/antd.css';
 import { Form, Select, Button, Col, Row } from 'antd';
+import styles from './SearchForm.module.css';
 
 const { Option } = Select;
-
 function SearchForm(props) {
     const { handleFilter } = props;
 
     const onFinish = values => {
-        console.log('Success:', values);
         handleFilter(values);
     };
 
@@ -21,13 +20,12 @@ function SearchForm(props) {
                 onFinish={onFinish}
                 style={{ marginTop: "5rem" }}
             >
-                <Row justify="center">
+                <Row justify="space-around" align="space-around" className={styles.search_container}>
                     <Col span={5} >
                         <Form.Item
                             name="category"
-                            label="Category"
                         >
-                            <Select placeholder="Category">
+                            <Select placeholder="Category" className={styles.input_field}>
                                 <Option value="business">Business</Option>
                                 <Option value="sports">Sports</Option>
                                 <Option value="science">Science</Option>
@@ -39,9 +37,8 @@ function SearchForm(props) {
                     <Col span={5}>
                         <Form.Item
                             name="language"
-                            label="Language"
                         >
-                            <Select placeholder="Language">
+                            <Select placeholder="Language" className={styles.input_field}>
                                 <Option value="ar">Arabic</Option>
                                 <Option value="en">English</Option>
                                 <Option value="fr">French</Option>
@@ -60,7 +57,6 @@ function SearchForm(props) {
                             </Form.Item>
                         </Row>
                     </Col>
-
                 </Row>
             </Form>
         </>

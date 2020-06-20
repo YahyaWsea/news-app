@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Register.module.css';
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Alert } from 'antd';
 import { registerUser } from '../api/user';
 
 const layout = {
@@ -13,6 +13,11 @@ const layout = {
 
 export default function Register(props) {
 
+    const [visible, setVisible] = useState(true);
+    const [errorMSG, setErrorMSG] = useState(null);
+    const handleClose = () => {
+        setVisible(false);
+    };
 
     const validateMessages = {
         required: '${name} is required!',
@@ -29,24 +34,13 @@ export default function Register(props) {
             confirm_password
         }
         registerUser(formData).then(res => {
-            if (res.data.status === "success") {
-                console.log(res);
-                sessionStorage.setItem('token', res.data.token);
-                props.history.push('/');
-            } else {
-                console.log(res);
-            }
+            sessionStorage.setItem('token', res.data.token);
+            props.history.push('/');
+
+        }).catch(err => {
+            setErrorMSG(err.response.data.message);
         })
-            .catch(err => {
-                console.log(err);
-            })
-        // console.log('Success:', values);
     };
-
-    const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
-    };
-
 
 
     return (
@@ -109,6 +103,13 @@ export default function Register(props) {
                         >
                             <Input.Password prefix={<LockOutlined />} placeholder="Confirm Password" className={styles.input_field} />
                         </Form.Item>
+                        {
+                            errorMSG && <Alert
+                                description={errorMSG}
+                                type="error"
+                                closable
+                            />
+                        }
                         <Form.Item>
                             <Button type="primary" htmlType="submit" className={styles.submit_btn}>
                                 Register

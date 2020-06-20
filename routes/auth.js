@@ -15,7 +15,7 @@ router.post('/login', sanitizeLogin, validateLogin, asyncTryCatch(async (req, re
     const { email, password } = req.body;
     const user = await User.loginUser(email, password);
     if (!user) {
-        throw new ErrorHandler(401, "These credentials are invalid ..");
+        throw new ErrorHandler(401, "These credentials are invalid");
     }
     const token = generateToken(user._id, user.email);
     if (!token) throw new ErrorHandler(500, " Error in generating token ");
@@ -51,7 +51,7 @@ router.post('/register', sanitizeRegister, validateRegister, asyncTryCatch(async
             token: token
         })
     } catch (error) {
-        throw new ErrorHandler(401, "Duplication error");
+        throw new ErrorHandler(401, "This email exists already");
     }
 }));
 

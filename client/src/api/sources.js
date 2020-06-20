@@ -1,7 +1,6 @@
 import axios from './token_axios';
-
-
 const SERVER_URL = "http://localhost:5000";
+
 
 export const getSources = () => {
     return axios.get(`${SERVER_URL}/sources`);

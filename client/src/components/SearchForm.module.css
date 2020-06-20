@@ -1,0 +1,19 @@
+.input_field {
+    font-size: 1.3rem;
+    /* color: #fff; */
+    font-weight: 800;
+    width: 20rem;
+    align-self: center;
+    /* color: blue; */
+    /* padding-left: 1rem; */
+    /* display: block; */
+    /* border: none; */
+    /* padding: 0.8em; */
+    /* border: solid 1px rgba(255, 255, 255, 0.37); */
+    border-radius: 0.5rem;
+    /* color: #fff; */
+    font-family: Montserrat, sans-serif;
+  }
+  /* .search_container{
+      background-color:#B3B8CD;
+  } */

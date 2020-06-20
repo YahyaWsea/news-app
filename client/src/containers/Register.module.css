@@ -1,5 +1,5 @@
 .section{
-    background: linear-gradient(45deg, #7289da, #99aab5, #2c2f33);
+    background: linear-gradient(45deg,   #7289da,White,  #99aab5  );
 	 background-size: 400% 400%;
      animation: Gradient 15s ease infinite;
      overflow: auto;
@@ -13,14 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; */
-    /* background: rgba(0, 0, 0, 0.18); */
     font-family: Montserrat, sans-serif;
-    /* background-color: red; */
   }
   .title{
       margin-bottom: 2rem;
@@ -31,7 +24,6 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      /* background-color: green; */
       margin-bottom: 0rem;
   }
   
@@ -41,27 +33,18 @@
 
   .input_field {
     font-size: 1.3rem;
-    /* color: #fff; */
     font-weight: 800;
     width: 20rem;
     align-self: center;
-    /* color: blue; */
-    /* padding-left: 1rem; */
-    /* display: block; */
-    /* border: none; */
-    /* padding: 0.8em; */
-    /* border: solid 1px rgba(255, 255, 255, 0.37); */
     border-radius: 0.5rem;
-    /* color: #fff; */
     font-family: Montserrat, sans-serif;
   }
   .input_field:hover{
-    border: solid 1px #23272a;
+    border: solid 1px blue;
   }
   .input_field:focus {
       color: blue;
   }
-  
   
   .submit_btn {
     font-size: 1rem;
@@ -72,7 +55,6 @@
     outline: none;
     border: 1px solid #76b852;
     cursor: pointer;
-    /* padding: 0.9em; */
     -webkit-appearance: none;
     width: 20rem;
     height: 2.5rem;

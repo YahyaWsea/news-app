@@ -1,8 +1,6 @@
 .img {
     height: 100%;
-    /* max-width: 100%; */
     width: 30rem;
-
     vertical-align: middle;
   }
   
@@ -19,10 +17,12 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     background: transparent;
     text-align: center;
+    font-weight: 500;
   }
   
   .btn:hover {
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: #61DBFB;
+    color: #231E39;
     text-decoration: none;
   }
   
@@ -52,7 +52,6 @@
   }
   
   .card {
-    background-color: white;
     border-radius: 0.25rem;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -68,8 +67,7 @@
   
   .card_content {
     padding: 1rem;
-    /* background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%); */
-    background: #bcbcbc;
+    background-color: #231E39;
     height: 50%;
     display: flex;
     flex-direction: column;

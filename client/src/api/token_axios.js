@@ -1,12 +1,14 @@
-import axios from 'axios'
+import axios from "axios";
+// Add a request interceptor
+axios.interceptors.request.use(
+    (config) => {
+        const token = sessionStorage.getItem("token");
+        if (token) config.headers.Authorization = `bearer ${token}`;
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
-const token = sessionStorage.getItem("token");
-console.log("Token .. ,", token);
-const headers = {}
-if (token) {
-    headers.Authorization = `bearer ${token}`;
-}
-// console.log(headers);
-export default axios.create({
-    headers
-});
+export default axios;

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'antd/dist/antd.css';
@@ -10,19 +10,10 @@ import Sources from './containers/Sources';
 import PageNotFound from './components/PageNotFound';
 
 
-import { Layout } from 'antd';
-const { Header, Content, Footer } = Layout;
-
-
-
 function App() {
-
-
 
   return (
     <>
-
-
       <Router>
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
@@ -34,9 +25,6 @@ function App() {
         </Switch>
 
       </Router>
-
-
-
     </>
   );
 }

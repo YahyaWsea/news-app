@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar'
 const WithNavBar = (Comp) => (props) => {
     return (
         <>
-            <NavBar />
+            <NavBar history={props.history} />
             <Comp {...props} />
         </>
     )
